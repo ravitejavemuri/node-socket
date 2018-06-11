@@ -30,14 +30,15 @@ io.on('connection', (socket) => {
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast.emit('newMessage', generateMessage('Admin',  'New User Joined'));
 
-    socket.on('createEmail', (Email) => {
-        console.log('createEmail to back', Email);
-    });
+    // socket.on('createEmail', (Email) => {
+    //     console.log('createEmail to back', Email);
+    // });
 
 
-    socket.on('createMessage', (Message) => {
-        //console.log("CreateMessage to back", Message);
+    socket.on('createMessage', (Message, callback) => {
+        console.log("CreateMessage to back", Message);
         io.emit('newMessage', generateMessage(Message.from, Message.text) );
+        callback('from server');
         // socket.broadcast.emit('newMessage', {
         //     from: Message.from,
         //     text: Message.text,
